@@ -1,0 +1,115 @@
+turma={'Clyde': [7.02, 6.43], 'Ding Ling': [2.08, 4.49], 'Kurby': [4.91, 2.41], 'Mac': [3.55, 0.33], 'Danny': [3.88, 2.6], 'Willy': [0.64, 6.12], 'Rug-Bug': [5.41, 3.71], 'Thor': [5.7, 4.06], 'Hulk': [7.04, 0.02], 'Viuva Negra': [4.88, 2.75], 'Wolverine': [8.28, 9.72], 'Deadpool': [6.82, 4.28], 'Thanos': [3.71, 5.36], 'Loki': [6.35, 5.65], 'Magneto': [7.45, 3.2], 'Ciclope': [6.72, 3.4], 'Jean Grey': [10.0, 0.75], 'Surfista Prateado': [4.66, 3.55], 'Venom': [8.76, 2.82], 'Nick Fury': [6.33, 6.3], 'Groot': [6.82, 4.49], 'Muttley': [9.45, 3.93], 'Penelope Charmosa': [6.65, 2.24], 'Peter Perfeito': [1.0, 6.27], 'Barão Vermelho': [0.87, 5.94], 'Red Max': [4.27, 4.3], 'Batman': [3.8, 5.3], 'Flash': [4.48, 3.73], 'Lanterna Verde': [2.02, 2.21], 'Aquaman': [4.75, 2.84], 'Cyborg': [6.15, 5.88], 'Coringa': [10.0, 1.48], 'Lex Luthor': [6.37, 4.05], 'Pinguim': [9.62, 2.88], 'Robin': [5.32, 0.58], 'Supergirl': [9.08, 9.6], 'Ravena': [5.65, 3.11], 'Shazam': [8.79, 5.62], 'Darkseid': [9.54, 1.2], 'Hera Venenosa': [8.92, 3.56]}
+
+pessoas = list(turma.keys())
+notas = list(turma.values())
+# 01 médias das notas em uma lista (separado por aluno)
+def cal_notas (f_notas):
+    media_al = []
+    total = 0
+    for a in range(len(f_notas)):
+        nota_interna = f_notas[a]
+        for b in range(len(nota_interna)):
+            total = (total + nota_interna[b])
+        add = round((total/2), 2)
+        media_al.append(add)
+        total =0
+    return media_al
+
+# 02 converter para (SS MS MM MI II) e adcionar para a lista
+def cal_mencao(f_notas):
+    mencao = []
+    for a in range(len(f_notas)):
+        if f_notas[a] >= 9:
+            mencao.append('SS')
+        elif 7 <= f_notas[a] < 9:
+            mencao.append('MS')
+        elif 5 <= f_notas[a] < 7:
+            mencao.append('MM')
+        elif 2.5 <= f_notas[a] < 5:
+            mencao.append('MI')
+        elif 0 <= f_notas[a] < 2.5:
+            mencao.append('II')
+    return mencao
+
+# 03 somatorio das notas e um contador para dividir = media da turma      
+def cal_media_turma(f_notas):
+    media_turma = 0
+    soma = 0 
+    contador = 0
+    for a in range(len(f_notas)):
+        contador = contador + 1 
+        soma = soma + f_notas[a]
+    media_turma = round((soma/contador),2)
+    return media_turma
+
+# 05 buscar maior e menor aluno (MAIOR MENOR) e passar o seu local
+def pos_max_min(f_notas):
+    maior = 0
+    menor = 10000
+    for a in range(len(f_notas)):
+        if maior < f_notas[a]:
+            maior = f_notas[a]
+            pos_maior = a
+        if menor > f_notas[a]:
+            menor = f_notas[a]
+            pos_menor =a
+    return pos_maior, pos_menor
+
+# 06 contagem de letras e trasformação para o perceitual
+def cal_percentual (f_mencao):
+    cont= 0
+    percentual = []
+    cont_ss =0
+    cont_ms =0
+    cont_mm =0
+    cont_mi =0
+    cont_ii =0
+    for a in range(len(f_mencao)):
+        cont= cont+ 1
+        if f_mencao[a] == 'SS':
+            cont_ss = cont_ss + 1
+        elif f_mencao[a] == 'MS':
+            cont_ms = cont_ms + 1
+        elif f_mencao[a] == 'MM':
+            cont_mm = cont_mm + 1
+        elif f_mencao[a] == 'MI':
+            cont_mi = cont_mi + 1
+        elif f_mencao[a] == 'II':
+            cont_ii = cont_ii + 1
+    percentual.append(round((cont_ss/cont)*100,2))
+    percentual.append(round((cont_ms/cont)*100,2))
+    percentual.append(round((cont_mm/cont)*100,2))
+    percentual.append(round((cont_mi/cont)*100,2))
+    percentual.append(round((cont_ii/cont)*100,2))
+    return percentual
+
+# 07 apresentação geral dos dados de forma organizada
+def apresentacao(f_notas,f_notu, f_mencao, f_maior,f_menor,f_media_turma,f_percentual):
+    print('Univercidade Informática e Magia - UIV')
+    print('Deiciplina : Organização e Arquitetura de COmputadores Quânticos Prof: Severus Mig')
+    print(f'{'nº':<3} {'Nome':<18} {'Nota 1': <7} {'Nota 2': <7} {'Média': <7} {"Menção Final": <10}')
+
+    for a in range(len(f_notas)):
+        nota_interna = f_notas[a]
+        for b in range(len(nota_interna)):   
+            print(f'{a+1:<3} {pessoas[a]: <18} {nota_interna[0]:<7} {nota_interna[1]:<7} {f_notu[a]:<7} {f_mencao[a]: <10}')
+            break
+    print('Maior média é o', f_maior, 'com a nota:',f_notu[maior_menor[0]], 'com menção :', f_mencao[maior_menor[0]])
+    print('Menor média é o', f_menor, 'com a nota:', f_notu[maior_menor[1]], 'com menção :', f_mencao[maior_menor[1]]) 
+    print('A média da turma:', f_media_turma)
+    print('Percentual de Menções : ')
+    print('II :', f_percentual[-1], '%')
+    print('MI :', f_percentual[-2], '%')
+    print('MM :', f_percentual[-3], '%')
+    print('MS :', f_percentual[-4], '%')
+    print('SS :', f_percentual[-5], '%')
+notu = cal_notas(notas)
+mencao = cal_mencao(notu)
+media_turma = cal_media_turma(notu)
+maior_menor = pos_max_min(notu)
+p_maior = pessoas[maior_menor[0]]
+p_menor = pessoas[maior_menor[1]]
+percentual = cal_percentual(mencao)
+apresentar = apresentacao(notas,notu,mencao,p_maior,p_menor,media_turma,percentual)
+
+print(apresentar)
