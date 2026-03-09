@@ -1,2 +1,2 @@
 # Faculdade
-Códigos associados à faculdade 
+Conjunto de códigos associados à faculdade 
